@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="container">
         <div className="logo">
           <Link className="link" to="/">
-            <span className="text">fiveer</span>
+            <span className="text">JobJuggle</span>
           </Link>
           <span className="dot">.</span>
         </div>

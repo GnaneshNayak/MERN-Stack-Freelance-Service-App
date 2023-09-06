@@ -18,7 +18,8 @@ const Gigs = () => {
         <span className="breadcrumbs">Liverr &gt; Graphics & Design &gt;</span>
         <h1>AI Artists</h1>
         <p>
-          Explore the boundries of art and technology with Fiveer's AI artists
+          Explore the boundries of art and technology with JobJuggle's AI
+          artists
         </p>
         <div className="menu">
           <div className="left">

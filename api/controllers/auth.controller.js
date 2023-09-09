@@ -20,12 +20,11 @@ export const register = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username: username });
+    const user = await User.findOne({ username: req.body.username });
 
     if (!user) return next(createError(404, 'User not found!'));
 
-    const isCorrect = bcrypt.compareSync(password, user.password);
+    const isCorrect = bcrypt.compareSync(req.body.password, user.password);
     if (!isCorrect)
       return next(createError(400, 'Wrong password or username!'));
 
@@ -37,8 +36,7 @@ export const login = async (req, res, next) => {
       process.env.JWT_KEY,
     );
 
-    const { password: userPassword, ...info } = user._doc;
-
+    const { password, ...info } = user._doc;
     res
       .cookie('accessToken', token, {
         httpOnly: true,
@@ -50,9 +48,16 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const logout = (req, res) => {
+export const logout = (req, res, next) => {
   try {
+    res
+      .clearCookie('accessToken', {
+        sameSite: 'none',
+        secure: true,
+      })
+      .status(200)
+      .send('User has been logged out.');
   } catch (err) {
-    res.status(500).send('somthng went wrong in logout');
+    next(err);
   }
 };

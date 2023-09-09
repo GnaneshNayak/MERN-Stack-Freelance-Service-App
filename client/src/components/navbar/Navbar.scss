@@ -12,6 +12,12 @@
   &.active {
     background-color: white;
     color: black;
+
+    button {
+      background-color: white !important;
+      color: black !important;
+      border: 1px solid black !important;
+    }
   }
 
   .container {
@@ -75,12 +81,12 @@
         padding: 10px 20px;
         border-radius: 5px;
         border: 1px solid white;
-        cursor: pointer;
         background-color: transparent;
+        cursor: pointer;
 
         &:hover {
           background-color: #1dbf73;
-          border-color: #1dbf73#1dbf73;
+          border-color: #1dbf73;
         }
       }
     }

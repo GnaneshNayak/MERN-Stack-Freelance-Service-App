@@ -25,12 +25,15 @@ const connect = async () => {
   }
 };
 
+console.log(process.env.FRONTEND_LOCAL, process.env.FRONTEND_NUMBER);
+
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    // origin: 'http://localhost:5173',
+    origin: [process.env.FRONTEND_LOCAL, process.env.FRONTEND_NUMBER],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // If you are using cookies or other credentials
   }),

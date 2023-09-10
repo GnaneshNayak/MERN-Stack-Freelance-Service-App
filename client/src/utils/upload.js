@@ -3,7 +3,6 @@ import axios from 'axios';
 const upload = async (file) => {
   const data = new FormData();
   data.append('file', file);
-  // data.append('cloud_name', 'dld6fmuojd');
   data.append('upload_preset', 'ctrbybaf');
   data.append('api_key', import.meta.env.VITE_APP_CLOUD);
 

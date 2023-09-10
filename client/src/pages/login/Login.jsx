@@ -41,7 +41,7 @@ const Login = () => {
           <h4> Demo Accounts </h4>
           <div>
             <p>
-              <h5>username:</h5>test <h5>Pass:</h5>test123
+              <b>username:</b>test <b>Pass:</b>test123
             </p>
           </div>
         </div>

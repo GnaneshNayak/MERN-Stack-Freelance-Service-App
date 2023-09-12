@@ -17,27 +17,24 @@ dotenv.config();
 mongoose.set('strictQuery', true);
 
 const connect = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO);
-    console.log('Connected to mongoDB!');
-  } catch (error) {
-    console.log(error);
-  }
+  await mongoose
+    .connect(process.env.MONGO)
+    .then((res) => console.log('Connected to mongoDB!'))
+    .catch((err) => console.log(err));
 };
-
-console.log(process.env.FRONTEND_LOCAL, process.env.FRONTEND_NUMBER);
 
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
-app.use(
-  cors({
-    // origin: 'http://localhost:5173',
-    origin: [process.env.FRONTEND_LOCAL, process.env.FRONTEND_NUMBER],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // If you are using cookies or other credentials
-  }),
-);
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5173');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
+  next();
+});
 
 app.use(express.json());
 app.use(cookieParser());

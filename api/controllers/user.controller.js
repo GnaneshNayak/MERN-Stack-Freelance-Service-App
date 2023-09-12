@@ -13,3 +13,12 @@ export const deleteUser = async (req, res, next) => {
   await User.findByIdAndDelete(req.params.id);
   res.status(200).send('deleted');
 };
+
+export const getUser = async (req, res, next) => {
+  console.log(req.params.id);
+  const user = await User.findById(req.params.id);
+
+  const { password, ...info } = user._doc;
+
+  res.status(200).send(info);
+};

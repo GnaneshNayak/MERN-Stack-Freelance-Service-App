@@ -9,7 +9,7 @@ const Messages = () => {
   // };
 
   const message =
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, harum! Corrupti officia nesciunt rem ullam quibusdam quidem porro placeat doloremque sequi, blanditiis possimus illum modi, impedit excepturi expedita minus corporis';
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, harum Corrupti officia nesciunt rem ullam quibusdam quidem porro placeat doloremque sequi, blanditiis possimus illum modi, impedit excepturi expedita minus corporis';
 
   return (
     <div className="messages">

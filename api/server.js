@@ -26,15 +26,24 @@ const connect = async () => {
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5173');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5173');
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
+//   res.setHeader(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept',
+//   );
+//   next();
+// });
+
+app.use(
+  cors({
+    origin: 'http://127.0.0.1:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Include PUT in the allowed methods
+    credentials: true, // Allow credentials (e.g., cookies)
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+  }),
+);
 
 app.use(express.json());
 app.use(cookieParser());

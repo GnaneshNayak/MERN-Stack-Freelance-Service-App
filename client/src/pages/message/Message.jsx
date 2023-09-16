@@ -1,8 +1,37 @@
-import './Message.scss';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
+import newRequest from '../../utils/newRequest';
+import './Message.scss';
+
 const Message = () => {
+  const queryClient = useQueryClient();
   const { id } = useParams();
-  console.log(id);
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['messages'],
+    queryFn: () => newRequest.get(`/messages/${id}`).then((res) => res.data),
+  });
+
+  const mutation = useMutation({
+    mutationFn: (message) => {
+      return newRequest.post(`/messages/`, message);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries('messages');
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(e.target[0].value);
+    mutation.mutate({
+      conversationId: id,
+      desc: e.target[0].value,
+    });
+    e.target[0].value = '';
+  };
+
   return (
     <div className="message">
       <div className="container">
@@ -13,82 +42,28 @@ const Message = () => {
           </Link>{' '}
           &gt; {id} &gt;
         </span>
-        <div className="messages">
-          <div className="item">
-            <img
-              src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iure
-              mollitia perspiciatis officiis voluptate? Sequi quae officia
-              possimus, iusto labore alias mollitia eveniet nemo placeat
-              laboriosam nisi animi! Error, tenetur!
-            </p>
+        {isLoading ? (
+          'Loading...'
+        ) : error ? (
+          'Somethong went wrong!'
+        ) : (
+          <div className="messages">
+            {data.map((m) => (
+              <div
+                key={m._id}
+                className={m.userId === currentUser._id ? 'owner item' : 'item'}
+              >
+                <img
+                  src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  alt=""
+                />
+                <p>{m.desc}</p>
+              </div>
+            ))}
           </div>
-          <div className="item owner">
-            <img
-              src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iure
-              mollitia perspiciatis officiis voluptate? Sequi quae officia
-              possimus, iusto labore alias mollitia eveniet nemo placeat
-              laboriosam nisi animi! Error, tenetur!
-            </p>
-          </div>
-          <div className="item">
-            <img
-              src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iure
-              mollitia perspiciatis officiis voluptate? Sequi quae officia
-              possimus, iusto labore alias mollitia eveniet nemo placeat
-              laboriosam nisi animi! Error, tenetur!
-            </p>
-          </div>
-          <div className="item owner">
-            <img
-              src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iure
-              mollitia perspiciatis officiis voluptate? Sequi quae officia
-              possimus, iusto labore alias mollitia eveniet nemo placeat
-              laboriosam nisi animi! Error, tenetur!
-            </p>
-          </div>
-          <div className="item">
-            <img
-              src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iure
-              mollitia perspiciatis officiis voluptate? Sequi quae officia
-              possimus, iusto labore alias mollitia eveniet nemo placeat
-              laboriosam nisi animi! Error, tenetur!
-            </p>
-          </div>
-          <div className="item owner">
-            <img
-              src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iure
-              mollitia perspiciatis officiis voluptate? Sequi quae officia
-              possimus, iusto labore alias mollitia eveniet nemo placeat
-              laboriosam nisi animi! Error, tenetur!
-            </p>
-          </div>
-        </div>
+        )}
         <hr />
-        <div className="writing">
+        <form onSubmit={handleSubmit} className="writing">
           <textarea
             name=""
             placeholder="Write a message"
@@ -96,8 +71,8 @@ const Message = () => {
             cols="30"
             rows="10"
           ></textarea>
-          <button>Send</button>
-        </div>
+          <button type="submit">Send</button>
+        </form>
       </div>
     </div>
   );

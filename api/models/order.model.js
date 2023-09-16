@@ -15,6 +15,10 @@ const orderSchema = new Schema(
       required: true,
     },
     sellerId: {
+      type: String,
+      required: true,
+    },
+    price: {
       type: Number,
       required: true,
     },

@@ -14,7 +14,7 @@ export const createReview = async (req, res, next) => {
   try {
     const review = await Review.findOne({
       gigId: req.body.gigId,
-      userId: req.body.userId,
+      userId: req.userId,
     });
     if (review)
       return next(

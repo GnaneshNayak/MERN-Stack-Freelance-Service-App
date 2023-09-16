@@ -2,7 +2,8 @@ import Gig from '../models/gig.model.js';
 import createError from '../utils/createError.js';
 
 export const createGig = async (req, res, next) => {
-  if (!req.isSeller) next(createError(403, 'Only Sellers can create gig!'));
+  if (!req.isSeller)
+    return next(createError(403, 'Only Sellers can create gig!'));
   // console.log(req.body);
   const newGig = await Gig({
     userId: req.userId,

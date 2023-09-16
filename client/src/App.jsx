@@ -15,6 +15,8 @@ import './App.scss';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import Pay from './pages/pay/Pay';
+import Success from './pages/success/Success';
 
 const queryClient = new QueryClient();
 
@@ -45,6 +47,8 @@ function App() {
         { path: 'order', element: <Orders /> },
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
+        { path: 'pay/:id', element: <Pay /> },
+        { path: 'success', element: <Success /> },
       ],
     },
   ]);

@@ -26,7 +26,6 @@ const Add = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(state);
 
     mutation.mutate(state);
 

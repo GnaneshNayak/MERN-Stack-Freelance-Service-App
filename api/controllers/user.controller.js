@@ -15,7 +15,6 @@ export const deleteUser = async (req, res, next) => {
 };
 
 export const getUser = async (req, res, next) => {
-  console.log(req.params.id);
   const user = await User.findById(req.params.id);
 
   const { password, ...info } = user._doc;

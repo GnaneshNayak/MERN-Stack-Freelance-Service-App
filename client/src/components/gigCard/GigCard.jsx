@@ -1,33 +1,35 @@
-import { Link } from 'react-router-dom';
-import './GigCard.scss';
-import { useQuery } from '@tanstack/react-query';
-import newRequest from '../../utils/newRequest';
+import React from "react";
+import "./GigCard.scss";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../utils/newRequest";
 
 const GigCard = ({ item }) => {
   const { isLoading, error, data } = useQuery({
-    queryKey: ['gigUser'],
+    queryKey: [item.userId],
     queryFn: () =>
-      newRequest.get(`/users/${item.userId}`).then((res) => res.data),
+      newRequest.get(`/users/${item.userId}`).then((res) => {
+        return res.data;
+      }),
   });
-  // console.log(data);
   return (
     <Link to={`/gig/${item._id}`} className="link">
       <div className="gigCard">
         <img src={item.cover} alt="" />
         <div className="info">
           {isLoading ? (
-            'Loading...'
+            "loading"
           ) : error ? (
-            'something went wrong'
+            "Something went wrong!"
           ) : (
             <div className="user">
-              <img src={data.img || '/img/noavatar.jpg'} alt="" />
+              <img src={data.img || "/img/noavatar.jpg"} alt="" />
               <span>{data.username}</span>
             </div>
           )}
           <p>{item.desc}</p>
           <div className="star">
-            <img src="/img/star.png" alt="" />
+            <img src="./img/star.png" alt="" />
             <span>
               {!isNaN(item.totalStars / item.starNumber) &&
                 Math.round(item.totalStars / item.starNumber)}
@@ -35,11 +37,11 @@ const GigCard = ({ item }) => {
           </div>
         </div>
         <hr />
-        <div className="details">
+        <div className="detail">
           <img src="./img/heart.png" alt="" />
           <div className="price">
             <span>STARTING AT</span>
-            <h2>${item.price}</h2>
+            <h2>$ {item.price}</h2>
           </div>
         </div>
       </div>

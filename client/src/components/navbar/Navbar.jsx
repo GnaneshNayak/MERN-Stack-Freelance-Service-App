@@ -1,44 +1,45 @@
-import { useEffect, useState } from 'react';
-import './Navbar.scss';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import newRequest from '../../utils/newRequest';
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import newRequest from "../../utils/newRequest";
+import "./Navbar.scss";
 
-const Navbar = () => {
+function Navbar() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
 
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+
+  const isActive = () => {
+    window.scrollY > 0 ? setActive(true) : setActive(false);
+  };
 
   useEffect(() => {
-    const isActive = () => {
-      window.scrollY > 0 ? setActive(true) : setActive(false);
-    };
-    window.addEventListener('scroll', isActive);
-
+    window.addEventListener("scroll", isActive);
     return () => {
-      window.removeEventListener('scroll', isActive);
+      window.removeEventListener("scroll", isActive);
     };
   }, []);
 
-  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await newRequest.post('auth/logout');
-      localStorage.setItem('currentUser', null);
-      navigate('/');
-    } catch (error) {
-      console.log(error);
+      await newRequest.post("/auth/logout");
+      localStorage.setItem("currentUser", null);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
     }
   };
 
   return (
-    <div className={active || pathname !== '/' ? 'navbar active' : 'navbar'}>
+    <div className={active || pathname !== "/" ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
           <Link className="link" to="/">
-            <span className="text">JobJuggle</span>
+            <span className="text">fiverr</span>
           </Link>
           <span className="dot">.</span>
         </div>
@@ -47,14 +48,9 @@ const Navbar = () => {
           <span>Explore</span>
           <span>English</span>
           {!currentUser?.isSeller && <span>Become a Seller</span>}
-          {!currentUser && (
-            <Link to={'/register'}>
-              <button>Join</button>
-            </Link>
-          )}
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
-              <img src={currentUser?.img || '/img/noavatar.jpg'} alt="" />
+              <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
@@ -82,14 +78,15 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="link">
-                Sign in
+              <Link to="/login" className="link">Sign in</Link>
+              <Link className="link" to="/register">
+                <button>Join</button>
               </Link>
             </>
           )}
         </div>
       </div>
-      {(active || pathname !== '/') && (
+      {(active || pathname !== "/") && (
         <>
           <hr />
           <div className="menu">
@@ -126,6 +123,6 @@ const Navbar = () => {
       )}
     </div>
   );
-};
+}
 
 export default Navbar;

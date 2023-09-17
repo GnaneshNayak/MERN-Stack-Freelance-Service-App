@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const newRequest = axios.create({
-  baseURL: import.meta.env.VITE_APP_BACKEND,
+  baseURL: 'https://jobjuggle.onrender.com/api',
   withCredentials: true,
 });
 

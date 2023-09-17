@@ -4,16 +4,15 @@
   display: flex;
   justify-content: center;
 
-  .conatiner {
-    width: 760px;
+  .container {
+    max-width: 760px;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 20px;
-    color: lightgray;
+    color: rgb(200, 200, 200);
     font-weight: 500;
 
-    img {
+    img{
       height: 50px;
       object-fit: contain;
     }

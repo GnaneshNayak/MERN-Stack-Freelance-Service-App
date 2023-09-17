@@ -2,8 +2,8 @@
   width: 300px;
   height: 300px;
   border-radius: 5px;
-  cursor: pointer;
   overflow: hidden;
+  cursor: pointer;
   border: 1px solid rgb(225, 225, 225);
 
   img {
@@ -19,16 +19,18 @@
     padding: 15px;
 
     img {
-      border-radius: 50%;
       width: 40px;
       height: 40px;
+      border-radius: 50%;
       object-fit: cover;
     }
+
     .texts {
       h2 {
         font-size: 14px;
         font-weight: 500;
       }
+
       span {
         font-size: 14px;
         font-weight: 300;

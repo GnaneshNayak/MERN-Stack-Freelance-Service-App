@@ -10,14 +10,13 @@
       color: #555;
     }
     .messages {
-      margin: 30px 0;
+      margin: 30px 0px;
+      padding: 50px;
       display: flex;
       flex-direction: column;
       gap: 20px;
-      padding: 50px;
       height: 500px;
       overflow: scroll;
-      overflow-x: hidden;
 
       .item {
         display: flex;
@@ -29,17 +28,10 @@
           flex-direction: row-reverse;
           align-self: flex-end;
 
-          img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-          }
           p {
-            padding: 20px;
-            background-color: royalblue;
+            max-width: 500px;
             border-radius: 20px 0px 20px 20px;
-            font-weight: 300;
+            background-color: royalblue;
             color: white;
           }
         }
@@ -50,22 +42,25 @@
           border-radius: 50%;
           object-fit: cover;
         }
+
         p {
+          max-width: 500px;
           padding: 20px;
-          background-color: lightgray;
+          background-color: rgb(244, 241, 241);
           border-radius: 0px 20px 20px 20px;
-          font-weight: 300;
           color: gray;
+          font-weight: 300;
         }
       }
     }
+
     hr {
       height: 0;
-      border: 0.5px solid rgb(224, 224, 224);
+      border: 0.5px solid rgb(232, 230, 230);
       margin-bottom: 20px;
     }
 
-    .writing {
+    .write {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -78,15 +73,15 @@
         border-radius: 10px;
       }
 
-      button {
+      button{
         background-color: #1dbf73;
         padding: 20px;
         color: white;
         font-weight: 500;
-        width: 100px;
         border: none;
         border-radius: 10px;
         cursor: pointer;
+        width: 100px;
       }
     }
   }

@@ -1,11 +1,10 @@
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import CheckoutForm from '../../components/checkOutForm/CheckoutForm';
+import './Pay.scss';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import newRequest from '../../utils/newRequest';
-// import './pay.module.css';
-import './pay.scss';
+import { useParams } from 'react-router-dom';
+import CheckoutForm from '../../components/checkoutForm/CheckoutForm';
 
 const stripePromise = loadStripe(
   'pk_test_51NqwyASCoFvFCE0lz6NbO8AE752KTggHEGAJxVZOue96m1UqAcadbhSVSW4DRZBbGTO09mud3ttE95i0nPNd7iZ400mYWHdQ0N',

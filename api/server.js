@@ -10,7 +10,6 @@ import messageRoute from './routes/message.route.js';
 import orderRoute from './routes/order.route.js';
 import reviewRoute from './routes/review.route.js';
 import userRoute from './routes/user.route.js';
-import helmet from 'helmet';
 const app = express();
 dotenv.config();
 mongoose.set('strictQuery', true);

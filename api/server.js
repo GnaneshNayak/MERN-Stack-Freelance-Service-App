@@ -10,6 +10,7 @@ import messageRoute from './routes/message.route.js';
 import orderRoute from './routes/order.route.js';
 import reviewRoute from './routes/review.route.js';
 import userRoute from './routes/user.route.js';
+import helmet from 'helmet';
 const app = express();
 dotenv.config();
 mongoose.set('strictQuery', true);
@@ -65,18 +66,7 @@ const connect = async () => {
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use(cors({ origin: 'https://jobjuggle.netlify.app/', credentials: true }));
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://jobjuggle.netlify.app');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
-});
+app.use(cors({ origin: 'http://127.0.0.1:5173', credentials: true }));
 
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
@@ -85,9 +75,7 @@ app.use('/api/orders', orderRoute);
 app.use('/api/conversations', conversationRoute);
 app.use('/api/messages', messageRoute);
 app.use('/api/reviews', reviewRoute);
-app.get('/', (req, res) => {
-  res.send('hello');
-});
+
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || 'Something went wrong!';

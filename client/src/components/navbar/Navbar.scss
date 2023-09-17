@@ -4,10 +4,10 @@
   align-items: center;
   background-color: #013914;
   color: white;
+  transition: 0.5s all ease;
   position: sticky;
   top: 0;
   z-index: 999;
-  transition: 0.5s all ease;
 
   &.active {
     background-color: white;
@@ -15,15 +15,14 @@
 
     button {
       background-color: white !important;
-      color: #1dbf73 !important;
-      border: 1px solid #1dbf73 !important;
+      color: black !important;
+      border: 1px solid black !important;
     }
   }
 
   .container {
     width: 1400px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
     padding: 20px 0px;
 
@@ -35,20 +34,16 @@
       }
 
       .dot {
-        font-weight: bold;
         color: #1dbf73;
       }
     }
+
     .links {
       display: flex;
-      align-items: center;
       gap: 24px;
-      font-family: "Montserrat", sans-serif;
+      align-items: center;
       font-weight: 500;
-
-      span {
-        white-space: nowrap;
-      }
+      font-family: 'Montserrat', 'sans-serif';
 
       .user {
         display: flex;
@@ -70,15 +65,14 @@
           right: 0;
           padding: 20px;
           background-color: white;
+          border: 1px solid lightgray;
           border-radius: 10px;
-          z-index: 999;
-          border: 1px solid lightgrey;
           display: flex;
           flex-direction: column;
           gap: 10px;
+          color: grey;
           width: 200px;
           font-weight: 300;
-          color: gray;
         }
       }
 
@@ -99,19 +93,18 @@
   }
 
   hr {
-    width: calc(100% - 2px);
+    width: 100%;
     height: 0;
-    border-top: 0.5px solid #ebe9e9;
-    border-bottom: 0.5px solid #ebe9e9;
+    border: 0.5px solid lightgray;
   }
 
   .menu {
     width: 1400px;
-    padding: 10px 0px;
+    padding: 10px 0;
     display: flex;
     justify-content: space-between;
-    color: gray;
     font-weight: 300;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', 'sans-serif';
+    color: grey;
   }
 }

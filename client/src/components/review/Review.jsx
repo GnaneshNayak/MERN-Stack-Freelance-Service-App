@@ -1,32 +1,40 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import newRequest from "../../utils/newRequest";
-import "./Review.scss";
+import { useQuery } from '@tanstack/react-query';
+import './Review.scss';
+import newRequest from '../../utils/newRequest';
+
 const Review = ({ review }) => {
-  const { isLoading, error, data } = useQuery(
-    {
-      queryKey: [review.userId],
-      queryFn: () =>
-        newRequest.get(`/users/${review.userId}`).then((res) => {
-          return res.data;
-        }),
-    },
-  );
+  const userId = review?.userId;
 
-
+  const {
+    isLoading,
+    error,
+    data: userData,
+  } = useQuery({
+    queryKey: ['userId', userId],
+    queryFn: () => newRequest.get(`/users/${userId}`).then((res) => res.data),
+    enabled: !!userId,
+  });
   return (
     <div className="review">
       {isLoading ? (
-        "loading"
+        'Loading....'
       ) : error ? (
-        "error"
+        'Somethong went wrong'
       ) : (
         <div className="user">
-          <img className="pp" src={data.img || "/img/noavatar.jpg"} alt="" />
+          <img
+            className="pp"
+            src={userData.img || '/img/noavatar.jpg'}
+            alt=""
+          />
           <div className="info">
-            <span>{data.username}</span>
+            <span>{userData?.username}</span>
             <div className="country">
-              <span>{data.country}</span>
+              <img
+                src="https://fiverr-dev-res.cloudinary.com/general_assets/flags/1f1fa-1f1f8.png"
+                alt=""
+              />
+              <span>{userData?.country}</span>
             </div>
           </div>
         </div>
@@ -39,6 +47,7 @@ const Review = ({ review }) => {
           ))}
         <span>{review.star}</span>
       </div>
+
       <p>{review.desc}</p>
       <div className="helpful">
         <span>Helpful?</span>

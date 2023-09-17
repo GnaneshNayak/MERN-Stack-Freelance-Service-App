@@ -1,36 +1,37 @@
-import React, { useState } from "react";
-import "./Featured.scss";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import './Featured.scss';
+import { useNavigate } from 'react-router-dom';
 
-function Featured() {
-  const [input, setInput] = useState("");
+const Featured = () => {
+  const [input, setInput] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleClick = () => {
     navigate(`/gigs?search=${input}`);
   };
   return (
     <div className="featured">
-      <div className="container">
+      <div className="conatiner">
         <div className="left">
           <h1>
-            Find the perfect <span>freelance</span> services for your business
+            Find the perfect <i>freelance</i> services for your business
           </h1>
           <div className="search">
-            <div className="searchInput">
+            <div className="searchInputs">
               <img src="./img/search.png" alt="" />
               <input
                 type="text"
-                placeholder='Try "building mobil app"'
+                placeholder='Try "Building mobile app"'
+                size={50}
                 onChange={(e) => setInput(e.target.value)}
               />
             </div>
-            <button onClick={handleSubmit}>Search</button>
+            <button onClick={handleClick}>Search</button>
           </div>
           <div className="popular">
             <span>Popular:</span>
             <button>Web Design</button>
-            <button>WordPress</button>
+            <button>Wordpress</button>
             <button>Logo Design</button>
             <button>AI Services</button>
           </div>
@@ -41,6 +42,6 @@ function Featured() {
       </div>
     </div>
   );
-}
+};
 
 export default Featured;

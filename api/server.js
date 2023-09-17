@@ -68,10 +68,20 @@ app.use(cookieParser());
 // app.use(cors({ origin: 'https://jobjuggle.netlify.app/', credentials: true }));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); // Replace '*' with your domain
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.header('Access-Control-Allow-Credentials', 'true'); // Enable credentials
 
+  if (req.method === 'OPTIONS') {
+    // Handle preflight requests (OPTIONS method)
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);

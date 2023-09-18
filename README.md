@@ -60,4 +60,4 @@ We welcome contributions from the community! If you have suggestions, feature re
 ## License
 This project is licensed under the MIT License.
 
-# Happy freelancing on Gigster! 🚀
+# Happy freelancing on Jobjuggle! 🚀

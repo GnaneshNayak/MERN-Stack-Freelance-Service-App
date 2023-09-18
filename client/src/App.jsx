@@ -14,7 +14,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './App.scss';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Pay from './pages/pay/Pay';
 import Success from './pages/success/Success';
 
@@ -57,7 +56,6 @@ function App() {
     <div className="app">
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </div>
   );
